@@ -1,0 +1,36 @@
+{
+  "redactInputBody": {
+    "anywhere": {
+      "full": [],
+      "cc": []
+    },
+    "path": {
+      "full": [],
+      "cc": []
+    }
+  },
+  "redactBodyRequest01": {
+    "anywhere": {
+      "full": [],
+      "cc": []
+    },
+    "path": {
+      "full": [],
+      "cc": []
+    }
+  },
+  "structuresAudit": {
+    "input_body": true,
+    "request_body_01": true,
+    "response_body_01": true,
+    "reply_body": true,
+    "exception_detail": true
+  },
+  "add": {
+    "input_body": "input_body_plain",
+    "request_body_01": "request_body_01_plain",
+    "response_body_01": "response_body_01_plain",
+    "reply_body": "reply_body_plain",
+    "exception_detail": "exception_detail_plain"
+  }
+}

@@ -1,0 +1,14 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0">
+    <servers>
+        <server>
+            <id>nexus.snapshot</id>
+            <username>synfwk-deploy</username>
+            <password>${env.NEXUS_PASSWORD}</password>
+        </server>
+        <server>
+            <id>nexus.release</id>
+            <username>synfwk-deploy</username>
+            <password>${env.NEXUS_PASSWORD}</password>
+        </server>
+    </servers>
+</settings>

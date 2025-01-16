@@ -1,0 +1,11 @@
+{
+  "resilience4j": {
+    "minimum-number-of-calls": 5,
+    "sliding-window-size": 10,
+    "sliding-window-type": "TIME_BASED",
+    "failure-rate-threshold": 50,
+    "wait-duration-in-open-state": 20,
+    "component.resilience": "ERROR",
+    "permitted-number-of-calls-in-half-open-state": 5
+  }
+}

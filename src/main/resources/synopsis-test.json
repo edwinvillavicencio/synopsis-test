@@ -1,0 +1,117 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Simple API - OpenAPI 3.0",
+    "description": "This is a sample",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.4"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "{scheme}://{host}/{basePath}",
+      "variables": {
+        "scheme": {
+          "enum": [
+            "https",
+            "http"
+          ],
+          "default": "https"
+        },
+        "host": {
+          "default": "simple-api.swagger.io"
+        },
+        "basePath": {
+          "default": "/api/v1"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "health",
+      "description": "Operations about health check"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Show dummy status",
+        "description": "Returns a hard message",
+        "operationId": "getHealth",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "URI not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HealthCheckResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Status of service",
+            "example": "OK!"
+          }
+        },
+        "xml": {
+          "name": "##default"
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://simple-api.swagger.io/oauth/authorize",
+            "scopes": {
+              "write:transcation": "scope for transaction",
+              "read:query": "scope for query"
+            }
+          }
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}

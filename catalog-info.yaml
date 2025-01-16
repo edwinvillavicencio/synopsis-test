@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: synopsis-test
+  description: Probando integracion backstage con kubernetes
+  tags:
+    - java
+    - rest
+  links:
+    - url: https://dev.azure.com/SynopsisAzure/Framework_Integracion_MS/_git/synopsis-test
+      title: Repository
+      icon: azure
+  annotations:
+    backstage.io/kubernetes-id: synopsis-test
+    argocd/app-name: synopsis-test
+
+spec:
+  type: service
+  owner: group:default/guests
+  lifecycle: production

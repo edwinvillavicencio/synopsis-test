@@ -1,0 +1,75 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ${P_K8S_APP}
+  namespace: ${P_K8S_NAMESPACE}
+  labels:
+    app: ${P_K8S_APP}
+    "backstage.io/kubernetes-id": ${P_K8S_APP}
+  annotations:
+    channels: "banca_movil,banca_internet"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${P_K8S_APP}-app
+      "backstage.io/kubernetes-id": ${P_K8S_APP}
+  template:
+    metadata:
+      labels:
+        app: ${P_K8S_APP}-app
+        "backstage.io/kubernetes-id": ${P_K8S_APP}
+    spec:
+      containers:
+        - name: ${P_K8S_APP}
+          env:
+          - name: CONTAINER_ID_CHANNEL
+            value: "channel-microservice-1"
+          image: registry.synopsis.cloud/${P_K8S_APP}:${P_K8S_VERSION}
+          imagePullPolicy: Always
+          ports:
+            - name: http-8080
+              containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/workspace/app/config"
+              name: application-config-folder
+          envFrom:
+            - secretRef:
+                name: ${P_K8S_APP}-secret
+          resources:
+            requests:
+              memory: "180Mi"
+              cpu: "10m"
+      imagePullSecrets:
+        - name: regcred
+      volumes:
+        - name: application-config-folder
+          persistentVolumeClaim:
+            claimName: ${VOLUME_NAME_DATA}-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ${P_K8S_APP}-svc
+    "backstage.io/kubernetes-id": ${P_K8S_APP}
+  name: ${P_K8S_APP}-svc
+  namespace: ${P_K8S_NAMESPACE}
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: http-8080
+      port: 8080
+      protocol: TCP
+      targetPort: http-8080
+  selector:
+    app: ${P_K8S_APP}-app
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: { }
