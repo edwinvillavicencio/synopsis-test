@@ -13,6 +13,7 @@ metadata:
   annotations:
     backstage.io/kubernetes-id: synopsis-test
     argocd/app-name: synopsis-test
+    tekton.dev/cicd : "true"
 
 spec:
   type: service
