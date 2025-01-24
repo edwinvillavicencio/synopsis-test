@@ -45,7 +45,7 @@
     <dependency>
       <groupId>ws.synopsis</groupId>
       <artifactId>fwk-integration-lib</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
 
     <!-- Spring Boot -->
