@@ -44,7 +44,8 @@ if [[ "" == "${P_IMG_REGISTRY_DOMAIN}" ]] ; then
 fi
 
 if [[ "login" == "${P_ACTION}" ]] ; then
-    docker login ${P_IMG_REGISTRY_DOMAIN}
+    #docker login ${P_IMG_REGISTRY_DOMAIN}
+    echo "${DOCKER_PASSWORD}" | docker login ${P_IMG_REGISTRY_DOMAIN} -u "${DOCKER_USERNAME}" --password-stdin
 fi
 
 if [[ "push" == "${P_ACTION}" ]] ; then
