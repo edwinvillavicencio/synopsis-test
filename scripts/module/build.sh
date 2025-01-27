@@ -39,5 +39,5 @@ if [[ "" == "${P_APP_VERSION}" ]] ; then
 fi
 
 if [[ "build" == "${P_ACTION}" ]] ; then
-    docker build -t "${P_APP_NAME}:${P_APP_VERSION}" --build-arg NEXUS_PASSWORD="${NEXUS_PASSWORD}" .
+    DOCKER_BUILDKIT=1 docker build -t "${P_APP_NAME}:${P_APP_VERSION}" --build-arg NEXUS_PASSWORD="${NEXUS_PASSWORD}" .
 fi
