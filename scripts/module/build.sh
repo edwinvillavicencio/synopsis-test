@@ -41,3 +41,8 @@ fi
 if [[ "build" == "${P_ACTION}" ]] ; then
     DOCKER_BUILDKIT=1 docker build -t "${P_APP_NAME}:${P_APP_VERSION}" --build-arg NEXUS_PASSWORD="${NEXUS_PASSWORD}" .
 fi
+
+if [[ "sonarqube" == "${P_ACTION}" ]] ; then
+#    cd "${script_dir}/../.."
+    ./mvnw clean verify sonar:sonar -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.projectName=${P_APP_NAME} -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.token=${SONAR_TOKEN} -s settings.xml
+fi

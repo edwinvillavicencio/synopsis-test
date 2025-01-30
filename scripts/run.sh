@@ -132,3 +132,7 @@ if [[ "restart" == "${P_ACTION}" ]] ; then
     ${script_dir}/run.sh --container-name ${P_CONTAINER_NAME} --action stop
     ${script_dir}/run.sh --container-name ${P_CONTAINER_NAME} --action start
 fi
+
+if [[ "sonarqube" == "${P_ACTION}" ]] ; then
+    ${script_dir}/module/build.sh --action sonarqube
+fi
